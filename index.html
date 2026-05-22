@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday My Love</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
+body{
+overflow:hidden;
+background:linear-gradient(45deg,#ff7eb3,#8ec5fc,#d16ba5,#c777b9);
+background-size:500% 500%;
+animation:bg 20s infinite alternate;
+color:white;
+}
+@keyframes bg{
+0%{background-position:0%}
+100%{background-position:100%}
+}
+
+.slide{
+display:none;
+height:100vh;
+width:100vw;
+position:absolute;
+padding:20px;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.active{display:flex;}
+
+img{
+max-width:90%;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,255,255,.6);
+}
+
+.collage{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+width:90%;
+}
+
+.collage img{
+height:200px;
+object-fit:cover;
+}
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:30px;
+background:#fff;
+color:#ff4f81;
+font-size:18px;
+margin:10px;
+cursor:pointer;
+}
+
+input{
+padding:15px;
+font-size:20px;
+border-radius:20px;
+border:none;
+text-align:center;
+}
+
+h1,h2,p{
+text-shadow:0 0 20px rgba(255,255,255,.9);
+}
+
+video{
+width:90%;
+border-radius:20px;
+}
+
+.galaxy{
+background:black url('https://i.imgur.com/e6lY6iD.jpg');
+background-size:cover;
+}
+
+.hearts{
+position:absolute;
+font-size:25px;
+animation:float 6s infinite linear;
+}
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-100vh);}
+}
+</style>
+</head>
+<body>
+
+<audio id="music" autoplay loop></audio>
+
+<!-- Slide 1 Password -->
+<div class="slide active">
+<h1>Unlock My Heart 💖</h1>
+<div class="collage">
+<img src="photos/photo1.jpg">
+<img src="photos/photo2.jpg">
+<img src="photos/photo3.jpg">
+<img src="photos/photo4.jpg">
+</div>
+<input id="pass" maxlength="4" placeholder="1106">
+<button onclick="checkPass()">Unlock</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+<h1>Happy Birthday BHONDU 🎂</h1>
+<p>My Cute Little Baby</p>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+<h2>Choose Your Gift 🎁</h2>
+<button onclick="next()">Chocolate</button>
+<button onclick="next()">Kiss</button>
+<button onclick="next()">Forever Love</button>
+<button onclick="angry()">I don't want gift</button>
+</div>
+
+<!-- Slide 4 Angry -->
+<div class="slide">
+<h1>😤 NOA YOU MUST KEEP IT</h1>
+<button onclick="next()">Okay Toti</button>
+</div>
+
+<!-- Slide 5 Galaxy -->
+<div class="slide galaxy">
+<h1>Your Eyes Are My Galaxy ✨</h1>
+<img src="photos/photo5.jpg">
+<p>They say galaxies are far... but I found mine in your eyes.</p>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+<h2>Uncle’s Cafe ☕</h2>
+<img src="photos/photo6.jpg">
+<p>The day everything started.</p>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide">
+<h2>Our First Eye Contact 👀</h2>
+<img src="photos/photo7.jpg">
+</div>
+
+<!-- Slide 8 -->
+<div class="slide">
+<h2>Our First Kiss 💋</h2>
+<img src="photos/photo8.jpg">
+<p>Nani Home ❤️</p>
+</div>
+
+<!-- Photo slides -->
+<script>
+for(let i=9;i<=70;i++){
+document.write(`
+<div class="slide">
+<h2>Memory ${i-8} 💕</h2>
+<img src="photos/photo${i}.jpg">
+<p>BHONDU • BOBO • TOTI • TOPLO</p>
+</div>
+`);
+}
+</script>
+
+<!-- Video slides -->
+<div class="slide">
+<h2>Special Memories 🎥</h2>
+<video controls src="videos/video1.mp4"></video>
+</div>
+
+<div class="slide">
+<h2>More Love Memories ❤️</h2>
+<video controls src="videos/video2.mp4"></video>
+</div>
+
+<div class="slide">
+<h2>Birthday Wish From My Heart 🎂</h2>
+<video controls src="videos/video5.mp4"></video>
+</div>
+
+<!-- Love Letter -->
+<div class="slide">
+<h1>To My Cute Little Baby 💌</h1>
+<p style="max-width:900px;font-size:22px;">
+From uncle’s cafe to today...  
+every memory with you became magic.  
+You changed ordinary moments into beautiful stories.  
+Your eyes became my galaxy.  
+Your smile became my peace.  
+Thank you for growing with me, laughing with me, loving me.  
+No matter what happens, you’ll always remain my most special blessing.  
+Happy Birthday BHONDU, NOA, THARKULI, BOBO, TOTI, TOPLO, DOBI.  
+I love you endlessly ❤️
+</p>
+</div>
+
+<script>
+let slides=document.querySelectorAll('.slide');
+let current=0;
+
+let songs=[
+'music/song1.mp3',
+'music/song2.mp3',
+'music/song3.mp3',
+'music/song4.mp3',
+'music/song5.mp3',
+'music/song6.mp3'
+];
+
+function show(n){
+slides[current].classList.remove('active');
+current=n;
+slides[current].classList.add('active');
+document.getElementById('music').src=songs[current%songs.length];
+}
+
+function next(){
+show((current+1)%slides.length);
+}
+
+function angry(){
+show(3);
+}
+
+function checkPass(){
+if(document.getElementById('pass').value==="1106"){
+next();
+}else alert("Wrong password TOTI 😤");
+}
+
+document.body.onclick=function(){
+if(current>0)next();
+}
+
+setInterval(()=>{
+let h=document.createElement('div');
+h.className='hearts';
+h.innerHTML='💖';
+h.style.left=Math.random()*100+'vw';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
+</script>
+
+</body>
+</html>
